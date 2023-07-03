@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Stack, Button, Col, Container, Row } from "react-bootstrap";
-
-const ToDoList = ({ arrayTodos }) => {
+import firebaseApp from "../credentials";
+import { getFirestore, updateDoc, doc } from "firebase/firestore";
+const firestore = getFirestore(firebaseApp);
+const ToDoList = ({ userEmail, arrayTodos, setUserTasks }) => {
+  const deleteTask = async (idTask) => {
+    let newArray = arrayTodos.filter((e) => e.id !== idTask);
+    const docRef = doc(firestore, `users/${userEmail}`);
+    updateDoc(docRef, { tasks: [...newArray] });
+    setUserTasks(newArray);
+  };
   return (
     <Container>
       <Stack>
@@ -10,11 +18,9 @@ const ToDoList = ({ arrayTodos }) => {
             <div key={index}>
               <Row>
                 <Col>{todo.description}</Col>
+
                 <Col>
-                  <Button>See File</Button>
-                </Col>
-                <Col>
-                  <Button>Delete</Button>
+                  <Button onClick={() => deleteTask(todo.id)}>Delete</Button>
                 </Col>
               </Row>
               <hr />

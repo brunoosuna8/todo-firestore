@@ -47,9 +47,21 @@ const Home = ({ name, email }) => {
   return (
     <Container>
       <h1>Hello {name ? name : ""},session started</h1>
-      <AddToDo></AddToDo>
+      {userTasks && (
+        <AddToDo
+          email={email}
+          arrayTodos={userTasks}
+          setUserTasks={setUserTasks}
+        ></AddToDo>
+      )}
 
-      {userTasks ? <ToDoList arrayTodos={userTasks}></ToDoList> : null}
+      {userTasks ? (
+        <ToDoList
+          arrayTodos={userTasks}
+          setUserTasks={setUserTasks}
+          userEmail={email}
+        ></ToDoList>
+      ) : null}
       <Button
         onClick={() => {
           signOut(auth);
