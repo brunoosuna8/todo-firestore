@@ -47,12 +47,8 @@ const Login = ({ setEmailVerified, emailverified }) => {
       }
 
       if (userCredential.user) {
-        // Envía el correo de verificación
         await sendEmailVerification(userCredential.user);
         console.log("Email verification sent!");
-        // userCredential.user.emailVerified
-        //   ? setEmailVerified(true)
-        //   : setEmailVerified(false);
       }
     } catch (error) {
       let res = handleErrors(error.message);

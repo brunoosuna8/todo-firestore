@@ -11,38 +11,35 @@ function App() {
   let [globalUser, setGlobalUser] = useState(null);
   let [userName, setUserName] = useState("");
   let [userEmail, setUserEmail] = useState("");
-  // const [emailVerified, setEmailVerified] = useState(false);
-  onAuthStateChanged(auth, (firebaseUser) => {
-    if (firebaseUser) {
-      setGlobalUser(firebaseUser);
-      setUserEmail(firebaseUser.email);
-      let userNickName;
-      firebaseUser.displayName
-        ? (userNickName = firebaseUser.displayName)
-        : (userNickName = firebaseUser.email.split("@")[0]);
-      setUserName(userNickName);
-      // globalUser.emailVerified
-      //   ? setEmailVerified(true)
-      //   : console.log(globalUser);
-    } else {
-      setGlobalUser(null);
-    }
-  });
-  useEffect(() => {}, []);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (firebaseUser) => {
+      try {
+        if (firebaseUser) {
+          console.log(firebaseUser);
+          setGlobalUser(firebaseUser);
+          setUserEmail(firebaseUser.email);
+
+          let userNickName;
+          firebaseUser.displayName
+            ? (userNickName = firebaseUser.displayName)
+            : (userNickName = firebaseUser.email.split("@")[0]);
+          setUserName(userNickName);
+        } else {
+          setGlobalUser(null);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    });
+  }, []);
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100">
       {globalUser ? (
-        <Home
-          name={userName}
-          email={globalUser.email}
-          // verification={emailVerified}
-        />
+        <Home name={userName} email={globalUser.email} user={globalUser} />
       ) : (
-        <Login
-        // setEmailVerified={setEmailVerified}
-        // emailVerified={emailVerified}
-        />
+        <Login />
       )}
     </div>
   );

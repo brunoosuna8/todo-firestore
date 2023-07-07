@@ -15,12 +15,13 @@ let fakeData = [
   { id: 3, description: "fake tarea 3" },
 ];
 
-const Home = ({ name, email, verification }) => {
+const Home = ({ name, email, user }) => {
   let [userTasks, setUserTasks] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       let tasks = await getDocOrCreateDoc(email);
+
       setUserTasks(tasks);
     };
     fetchData();
@@ -47,43 +48,43 @@ const Home = ({ name, email, verification }) => {
 
   return (
     <>
-      {/* {verification === true ? ( */}
-      <Container
-        style={{ alignItems: "start", position: "absolute", top: "0" }}
-      >
-        <h1
-          style={{
-            padding: "10px",
-          }}
+      {user.emailVerified === true ? (
+        <Container
+          style={{ alignItems: "start", position: "absolute", top: "0" }}
         >
-          Hello {name ? name : ""}
-        </h1>
-        {userTasks && (
-          <AddToDo
-            email={email}
-            arrayTodos={userTasks}
-            setUserTasks={setUserTasks}
-          ></AddToDo>
-        )}
+          <h1
+            style={{
+              padding: "10px",
+            }}
+          >
+            Hello {name ? name : ""}
+          </h1>
+          {userTasks && (
+            <AddToDo
+              email={email}
+              arrayTodos={userTasks}
+              setUserTasks={setUserTasks}
+            ></AddToDo>
+          )}
 
-        {userTasks ? (
-          <ToDoList
-            arrayTodos={userTasks}
-            setUserTasks={setUserTasks}
-            userEmail={email}
-          ></ToDoList>
-        ) : null}
-        <Button
-          onClick={() => {
-            signOut(auth);
-          }}
-        >
-          Sign Out
-        </Button>
-      </Container>
-      {/* ) : ( */}
-      {/* <h2>verify your email please</h2> */}
-      {/* )} */}
+          {userTasks ? (
+            <ToDoList
+              arrayTodos={userTasks}
+              setUserTasks={setUserTasks}
+              userEmail={email}
+            ></ToDoList>
+          ) : null}
+          <Button
+            onClick={() => {
+              signOut(auth);
+            }}
+          >
+            Sign Out
+          </Button>
+        </Container>
+      ) : (
+        <h2>verify your email please</h2>
+      )}
     </>
   );
 };
