@@ -15,8 +15,9 @@ let fakeData = [
   { id: 3, description: "fake tarea 3" },
 ];
 
-const Home = ({ name, email }) => {
+const Home = ({ name, email, verification }) => {
   let [userTasks, setUserTasks] = useState(null);
+
   useEffect(() => {
     const fetchData = async () => {
       let tasks = await getDocOrCreateDoc(email);
@@ -45,31 +46,45 @@ const Home = ({ name, email }) => {
   };
 
   return (
-    <Container>
-      <h1>Hello {name ? name : ""},session started</h1>
-      {userTasks && (
-        <AddToDo
-          email={email}
-          arrayTodos={userTasks}
-          setUserTasks={setUserTasks}
-        ></AddToDo>
-      )}
-
-      {userTasks ? (
-        <ToDoList
-          arrayTodos={userTasks}
-          setUserTasks={setUserTasks}
-          userEmail={email}
-        ></ToDoList>
-      ) : null}
-      <Button
-        onClick={() => {
-          signOut(auth);
-        }}
+    <>
+      {/* {verification === true ? ( */}
+      <Container
+        style={{ alignItems: "start", position: "absolute", top: "0" }}
       >
-        Sign Out
-      </Button>
-    </Container>
+        <h1
+          style={{
+            padding: "10px",
+          }}
+        >
+          Hello {name ? name : ""}
+        </h1>
+        {userTasks && (
+          <AddToDo
+            email={email}
+            arrayTodos={userTasks}
+            setUserTasks={setUserTasks}
+          ></AddToDo>
+        )}
+
+        {userTasks ? (
+          <ToDoList
+            arrayTodos={userTasks}
+            setUserTasks={setUserTasks}
+            userEmail={email}
+          ></ToDoList>
+        ) : null}
+        <Button
+          onClick={() => {
+            signOut(auth);
+          }}
+        >
+          Sign Out
+        </Button>
+      </Container>
+      {/* ) : ( */}
+      {/* <h2>verify your email please</h2> */}
+      {/* )} */}
+    </>
   );
 };
 

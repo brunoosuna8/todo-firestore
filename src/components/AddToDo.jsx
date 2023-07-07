@@ -19,7 +19,7 @@ const AddToDo = ({ email, arrayTodos, setUserTasks }) => {
     setNewTask("");
   };
   const handleChange = (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
     setNewTask(e.target.value);
   };
   return (
