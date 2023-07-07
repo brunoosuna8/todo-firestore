@@ -6,6 +6,7 @@ import ToDoList from "./ToDoList";
 import AddToDo from "./AddToDo";
 import { getFirestore, setDoc } from "firebase/firestore";
 import { doc, getDoc } from "firebase/firestore";
+import NonVerified from "./NonVerified";
 
 const auth = getAuth(firebaseApp);
 const firestore = getFirestore(firebaseApp);
@@ -83,7 +84,7 @@ const Home = ({ name, email, user }) => {
           </Button>
         </Container>
       ) : (
-        <h2>verify your email please</h2>
+        <NonVerified user={user} />
       )}
     </>
   );
