@@ -22,12 +22,6 @@ const Login = ({ setEmailVerified, emailverified }) => {
     const email = e.target.formBasicEmail.value;
     const password = e.target.formBasicPassword.value;
     let userCredential;
-    // const verify = async (user) => {
-    //   if (user && user.emailVerified === false) {
-    //     await sendEmailVerification(user);
-    //     console.log("Email verification sent!");
-    //   }
-    // };
     try {
       if (isRegistering) {
         userCredential = await createUserWithEmailAndPassword(
@@ -35,15 +29,12 @@ const Login = ({ setEmailVerified, emailverified }) => {
           email,
           password
         );
-
-        console.log(userCredential.user);
       } else {
         userCredential = await signInWithEmailAndPassword(
           auth,
           email,
           password
         );
-        console.log(userCredential.user);
       }
 
       if (userCredential.user) {

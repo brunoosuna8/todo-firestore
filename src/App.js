@@ -16,7 +16,6 @@ function App() {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       try {
         if (firebaseUser) {
-          console.log(firebaseUser);
           setGlobalUser(firebaseUser);
 
           let userNickName;
