@@ -20,7 +20,9 @@ const ToDoList = ({ userEmail, arrayTodos, setUserTasks }) => {
                 <Col>{todo.description}</Col>
 
                 <Col>
-                  <Button onClick={() => deleteTask(todo.id)}>Delete</Button>
+                  <Button variant="danger" onClick={() => deleteTask(todo.id)}>
+                    Delete
+                  </Button>
                 </Col>
               </Row>
               <hr />

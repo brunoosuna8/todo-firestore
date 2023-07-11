@@ -35,7 +35,15 @@ const AddToDo = ({ email, arrayTodos, setUserTasks }) => {
             />
           </Col>
           <Col>
-            <Button type="submit" disabled={newTask === "" ? true : false}>
+            <Button
+              type="submit"
+              style={
+                newTask === ""
+                  ? { border: "none" }
+                  : { border: "1px solid white" }
+              }
+              disabled={newTask === "" ? true : false}
+            >
               Add ToDo
             </Button>
           </Col>

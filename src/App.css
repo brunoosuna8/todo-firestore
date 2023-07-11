@@ -1,5 +1,6 @@
-* {
-  display: flex;
+#app {
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
+  background-image: url("./split_background.svg");
 }

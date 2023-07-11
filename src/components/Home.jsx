@@ -51,7 +51,15 @@ const Home = ({ name, email, user }) => {
     <>
       {user.emailVerified === true ? (
         <Container
-          style={{ alignItems: "start", position: "absolute", top: "0" }}
+          style={{
+            alignItems: "start",
+            position: "absolute",
+            top: "auto",
+            padding: "20px",
+            border: "4px solid  #78aefe",
+            borderRadius: "15px",
+            backgroundColor: "white",
+          }}
         >
           <h1
             style={{

@@ -5,7 +5,7 @@ import firebaseApp from "./credentials";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Loading from "./components/Loading";
-// import "./App.css";
+import "./App.css";
 const auth = getAuth(firebaseApp);
 
 function App() {
@@ -36,7 +36,10 @@ function App() {
   }, []);
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100">
+    <div
+      id="app"
+      className="d-flex justify-content-center align-items-center vh-100"
+    >
       {loading ? (
         <Loading /> // Display the loading component while fetching user information
       ) : globalUser ? (

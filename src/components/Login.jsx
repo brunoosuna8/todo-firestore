@@ -58,6 +58,7 @@ const Login = ({ setEmailVerified, emailverified }) => {
         borderRadius: "15px",
         padding: "15px 5px",
         margin: "5px",
+        backgroundColor: "white",
       }}
     >
       <Stack
